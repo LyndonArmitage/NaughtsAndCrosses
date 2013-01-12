@@ -14,6 +14,11 @@ import android.os.Bundle;
  * @see <a href='http://en.wikipedia.org/wiki/Tic-tac-toe'>Wikipedia Page</a>
  */
 public class MainActivity extends Activity {
+
+	// Representing the game state:
+	private boolean noughtsTurn = false; // Who's turn is it? false=X true=O
+	private char board[][] = new char[3][3]; // for now we will represent the board as an array of characters
+
 	/**
 	 * Called when the activity is first created.
 	 */
