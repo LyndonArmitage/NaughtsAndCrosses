@@ -75,14 +75,12 @@ public class MainActivity extends Activity {
 	 */
 	private boolean checkWin() {
 
-
 		char winner = '\0';
 		if (checkWinner(board, 3, 'X')) {
 			winner = 'X';
 		} else if (checkWinner(board, 3, 'O')) {
 			winner = 'O';
 		}
-
 
 		if (winner == '\0') {
 			return false; // nobody won
@@ -95,58 +93,64 @@ public class MainActivity extends Activity {
 	}
 
 
-	// n == 3
-	// C == 'X' or 'O'
-	private boolean checkWinner(char[][] a, int n, char C) {
+	/**
+	 * This is a generic algorithm for checking if a specific player has won on a tic tac toe board of any size.
+	 *
+	 * @param board  the board itself
+	 * @param size   the width and height of the board
+	 * @param player the player, 'X' or 'O'
+	 * @return true if the specified player has won
+	 */
+	private boolean checkWinner(char[][] board, int size, char player) {
 		// check each column
-		for (int x = 0; x < n; x++) {
+		for (int x = 0; x < size; x++) {
 			int total = 0;
-			for (int y = 0; y < n; y++) {
-				if (a[x][y] == C) {
+			for (int y = 0; y < size; y++) {
+				if (board[x][y] == player) {
 					total++;
 				}
 			}
-			if (total >= n) {
+			if (total >= size) {
 				return true; // they win
 			}
 		}
 
 		// check each row
-		for (int y = 0; y < n; y++) {
+		for (int y = 0; y < size; y++) {
 			int total = 0;
-			for (int x = 0; x < n; x++) {
-				if (a[x][y] == C) {
+			for (int x = 0; x < size; x++) {
+				if (board[x][y] == player) {
 					total++;
 				}
 			}
-			if (total >= n) {
+			if (total >= size) {
 				return true; // they win
 			}
 		}
 
 		// forward diag
 		int total = 0;
-		for (int x = 0; x < n; x++) {
-			for (int y = 0; y < n; y++) {
-				if (x == y && a[x][y] == C) {
+		for (int x = 0; x < size; x++) {
+			for (int y = 0; y < size; y++) {
+				if (x == y && board[x][y] == player) {
 					total++;
 				}
 			}
 		}
-		if (total >= n) {
+		if (total >= size) {
 			return true; // they win
 		}
 
 		// backward diag
 		total = 0;
-		for (int x = 0; x < n; x++) {
-			for (int y = 0; y < n; y++) {
-				if (x + y == n - 1 && a[x][y] == C) {
+		for (int x = 0; x < size; x++) {
+			for (int y = 0; y < size; y++) {
+				if (x + y == size - 1 && board[x][y] == player) {
 					total++;
 				}
 			}
 		}
-		if (total >= n) {
+		if (total >= size) {
 			return true; // they win
 		}
 
