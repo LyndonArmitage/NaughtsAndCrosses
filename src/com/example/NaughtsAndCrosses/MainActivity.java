@@ -216,7 +216,7 @@ public class MainActivity extends Activity {
 				B.setEnabled(false);
 				noughtsTurn = !noughtsTurn;
 
-				// check if anyone has one
+				// check if anyone has won
 				if (checkWin()) {
 					disableButtons();
 				}
