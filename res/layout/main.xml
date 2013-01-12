@@ -13,7 +13,8 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="New Game"
-            android:id="@+id/newGameBtn" android:layout_column="0" android:layout_gravity="center_horizontal"/>
+            android:id="@+id/newGameBtn" android:layout_column="0" android:layout_gravity="center_horizontal"
+            android:onClick="newGame"/>
     <TableLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:layout_gravity="center" android:id="@+id/tableLayout">
