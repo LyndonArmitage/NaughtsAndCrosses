@@ -65,6 +65,17 @@ public class MainActivity extends Activity {
 	}
 
 	/**
+	 * Method that returns true when someone has won and false when nobody has.<br />
+	 * It also display the winner on screen.
+	 *
+	 * @return
+	 */
+	private boolean checkWin() {
+
+		return false; // nobody won
+	}
+
+	/**
 	 * This will add the OnClickListener to each button inside out TableLayout
 	 */
 	private void setupOnClickListeners() {
