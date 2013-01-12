@@ -7,7 +7,7 @@
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Naughts &amp; Crosses - By Lyndon Armitage"
+            android:text="@string/title"
             android:id="@+id/titleText" android:layout_gravity="center_horizontal"/>
     <Button
             android:layout_width="fill_parent"
