@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.widget.TextView;
 
 /**
  * Tic Tac Toe Game
@@ -62,6 +63,8 @@ public class MainActivity extends Activity {
 				}
 			}
 		}
+		TextView t = (TextView) findViewById(R.id.titleText);
+		t.setText(R.string.title);
 	}
 
 	/**
@@ -72,7 +75,100 @@ public class MainActivity extends Activity {
 	 */
 	private boolean checkWin() {
 
+
+		char winner = '\0';
+		if (checkWinner(board, 3, 'X')) {
+			winner = 'X';
+		} else if (checkWinner(board, 3, 'O')) {
+			winner = 'O';
+		}
+
+
+		if (winner == '\0') {
+			return false; // nobody won
+		} else {
+			// display winner
+			TextView T = (TextView) findViewById(R.id.titleText);
+			T.setText(winner + " wins");
+			return true;
+		}
+	}
+
+
+	// n == 3
+	// C == 'X' or 'O'
+	private boolean checkWinner(char[][] a, int n, char C) {
+		// check each column
+		for (int x = 0; x < n; x++) {
+			int total = 0;
+			for (int y = 0; y < n; y++) {
+				if (a[x][y] == C) {
+					total++;
+				}
+			}
+			if (total >= n) {
+				return true; // they win
+			}
+		}
+
+		// check each row
+		for (int y = 0; y < n; y++) {
+			int total = 0;
+			for (int x = 0; x < n; x++) {
+				if (a[x][y] == C) {
+					total++;
+				}
+			}
+			if (total >= n) {
+				return true; // they win
+			}
+		}
+
+		// forward diag
+		int total = 0;
+		for (int x = 0; x < n; x++) {
+			for (int y = 0; y < n; y++) {
+				if (x == y && a[x][y] == C) {
+					total++;
+				}
+			}
+		}
+		if (total >= n) {
+			return true; // they win
+		}
+
+		// backward diag
+		total = 0;
+		for (int x = 0; x < n; x++) {
+			for (int y = 0; y < n; y++) {
+				if (x + y == n - 1 && a[x][y] == C) {
+					total++;
+				}
+			}
+		}
+		if (total >= n) {
+			return true; // they win
+		}
+
 		return false; // nobody won
+	}
+
+	/**
+	 * Disables all the buttons in the grid.
+	 */
+	private void disableButtons() {
+		TableLayout T = (TableLayout) findViewById(R.id.tableLayout);
+		for (int y = 0; y < T.getChildCount(); y++) {
+			if (T.getChildAt(y) instanceof TableRow) {
+				TableRow R = (TableRow) T.getChildAt(y);
+				for (int x = 0; x < R.getChildCount(); x++) {
+					if (R.getChildAt(x) instanceof Button) {
+						Button B = (Button) R.getChildAt(x);
+						B.setEnabled(false);
+					}
+				}
+			}
+		}
 	}
 
 	/**
@@ -115,6 +211,11 @@ public class MainActivity extends Activity {
 				B.setText(noughtsTurn ? "O" : "X");
 				B.setEnabled(false);
 				noughtsTurn = !noughtsTurn;
+
+				// check if anyone has one
+				if (checkWin()) {
+					disableButtons();
+				}
 			}
 		}
 	}
